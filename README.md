@@ -3,10 +3,6 @@
 SkeletonPlaceholder is a React Native library to easily create an amazing loading effect with FlexBox.<br/>
 Android and iOS
 
-![](https://user-images.githubusercontent.com/20586489/194037825-92efe72b-2e00-407d-8b18-ab949a85e1ea.mp4)
-
-<a href="https://www.buymeacoffee.com/henriqueramos" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
 ### Installation
 
 > Note: This package requires **@react-native-masked-view/masked-view** and **react-native-linear-gradient**
@@ -45,13 +41,13 @@ pod install
 Using yarn:
 
 ```bash
-yarn add @satish/react-native-skeleton-placeholder
+yarn add react-native-skeleton-placeholder
 ```
 
 Using npm:
 
 ```bash
-npm install @satish/react-native-skeleton-placeholder --save
+npm install react-native-skeleton-placeholder --save
 ```
 
 ### Usage
@@ -63,7 +59,7 @@ with **SkeletonPlacehoder.Item** 🆕
 ```javascript
 import React from "react";
 import { View } from "react-native";
-import SkeletonPlaceholder from "@satish/react-native-skeleton-placeholder";
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 const App = () => {
   return (
@@ -85,7 +81,7 @@ or with **View**, **Text** or **Image**
 ```javascript
 import React from "react";
 import { View } from "react-native";
-import SkeletonPlaceholder from "@satish/react-native-skeleton-placeholder";
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 const App = () => {
   return (
@@ -107,9 +103,69 @@ const App = () => {
 };
 ```
 
+### Global Configuration
+
+If you use `SkeletonPlaceholder` in many places and want to avoid repeating the same `backgroundColor`, `highlightColor`, or other props everywhere, wrap your app (or any subtree) with `SkeletonPlaceholderConfigProvider` and pass a `config` object. Every `SkeletonPlaceholder` inside that tree will automatically pick up those values.
+
+Any prop passed **directly** to `<SkeletonPlaceholder>` takes priority over the global config.
+
+```javascript
+import SkeletonPlaceholder, {
+  SkeletonPlaceholderConfigProvider,
+} from "react-native-skeleton-placeholder";
+
+// Set once at the root of your app
+const App = () => (
+  <SkeletonPlaceholderConfigProvider
+    config={{
+      backgroundColor: "#2A2A2A",
+      highlightColor: "#3D3D3D",
+      speed: 1000,
+      direction: "right",
+      borderRadius: 4,
+    }}
+  >
+    <YourApp />
+  </SkeletonPlaceholderConfigProvider>
+);
+
+// All usages below automatically use the global config
+const ProfileSkeleton = () => (
+  <SkeletonPlaceholder>
+    <SkeletonPlaceholder.Item width={120} height={20} />
+  </SkeletonPlaceholder>
+);
+
+// Override per-instance when needed — only this one uses a different speed
+const FeedSkeleton = () => (
+  <SkeletonPlaceholder speed={500}>
+    <SkeletonPlaceholder.Item width={200} height={20} />
+  </SkeletonPlaceholder>
+);
+```
+
+#### SkeletonPlaceholderConfigProvider props
+
+|  Prop  |                          Description                           |            Type             | Required |
+| :----: | :------------------------------------------------------------: | :-------------------------: | :------: |
+| config | Global defaults applied to all SkeletonPlaceholder in the tree | `SkeletonPlaceholderConfig` |   yes    |
+
+#### SkeletonPlaceholderConfig shape
+
+|      Field      |                             Description                              |            Type             |
+| :-------------: | :------------------------------------------------------------------: | :-------------------------: |
+| backgroundColor |                 Determines the color of placeholder                  |           string            |
+| highlightColor  |            Determines the highlight color of placeholder             | string (hex \| rgb \| rgba) |
+|      speed      | Determines the animation speed in milliseconds. 0 disables animation |           number            |
+|    direction    |                  Determines the animation direction                  |      "right" \| "left"      |
+|  borderRadius   |          Determines default border radius for placeholders           |           number            |
+|  shimmerWidth   |             Determines the width of the highlighted area             |           number            |
+
 ### Properties
 
 #### SkeletonPlaceholder
+
+All props below override the corresponding value from `SkeletonPlaceholderConfigProvider` when provided.
 
 |      Prop       |                             Description                              |            Type             |  Default  |
 | :-------------: | :------------------------------------------------------------------: | :-------------------------: | :-------: |
@@ -119,6 +175,7 @@ const App = () => {
 |    direction    |                  Determines the animation direction                  |      "right" \| "left"      |  "right"  |
 |     enabled     |   Determines if Skeleton should show placeholders or its children    |           boolean           |   true    |
 |  borderRadius   |          Determines default border radius for placeholders           |           number            | undefined |
+|  shimmerWidth   |             Determines the width of the highlighted area             |           number            | undefined |
 
 #### SkeletonPlaceholder.Item
 
