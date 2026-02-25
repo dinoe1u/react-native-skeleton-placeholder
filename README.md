@@ -41,13 +41,13 @@ pod install
 Using yarn:
 
 ```bash
-yarn add react-native-skeleton-placeholder
+yarn add @satish/react-native-skeleton-placeholder
 ```
 
 Using npm:
 
 ```bash
-npm install react-native-skeleton-placeholder --save
+npm install @satish/react-native-skeleton-placeholder --save
 ```
 
 ### Usage
@@ -59,7 +59,7 @@ with **SkeletonPlacehoder.Item** 🆕
 ```javascript
 import React from "react";
 import { View } from "react-native";
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import SkeletonPlaceholder from "@satish/react-native-skeleton-placeholder";
 
 const App = () => {
   return (
@@ -81,7 +81,7 @@ or with **View**, **Text** or **Image**
 ```javascript
 import React from "react";
 import { View } from "react-native";
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import SkeletonPlaceholder from "@satish/react-native-skeleton-placeholder";
 
 const App = () => {
   return (
@@ -112,7 +112,7 @@ Any prop passed **directly** to `<SkeletonPlaceholder>` takes priority over the 
 ```javascript
 import SkeletonPlaceholder, {
   SkeletonPlaceholderConfigProvider,
-} from "react-native-skeleton-placeholder";
+} from "@satish/react-native-skeleton-placeholder";
 
 // Set once at the root of your app
 const App = () => (
